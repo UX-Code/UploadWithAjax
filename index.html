@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form id="frmupload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="file" required />
+    </form>
+    <div id="response"></div>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script>
+         $(function(){
+            $("input[name='file']").on("change", function(){
+                var formData = new FormData($("#frmupload")[0]);
+                $.ajax({
+                    url: "upload.php",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(datos)
+                    {
+                        $("#response").html(datos);
+                    }
+                });
+            });
+         });
+    </script>
+  </body>
+</html>
